@@ -1,0 +1,45 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { formatDate } from '@/utils/formatDate';
+import type { InternalAuditRead } from '@/types/internalAudit.types';
+
+interface InternalAuditCardProps {
+  audit: InternalAuditRead;
+}
+
+export const InternalAuditCard: React.FC<InternalAuditCardProps> = ({ audit }) => {
+  return (
+    <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow space-y-3 flex flex-col justify-between text-xs">
+      <div>
+        <div className="flex justify-between items-start gap-2 mb-2">
+          <span className="font-mono font-bold text-xs text-primary-700 bg-primary-50 px-2 py-0.5 rounded border border-primary-200">
+            {audit.audit_number}
+          </span>
+          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+            audit.status === 'CLOSED' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
+          }`}>
+            {audit.status}
+          </span>
+        </div>
+
+        <h3 className="font-bold text-gray-900 text-sm line-clamp-1">{audit.title}</h3>
+        <p className="text-gray-500 text-[11px] mt-0.5">
+          Lead Auditor: <span className="font-semibold text-gray-700">{audit.lead_auditor}</span> | Dept: <span className="font-semibold text-gray-700">{audit.department}</span>
+        </p>
+      </div>
+
+      <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+        <span className="text-gray-400 text-[11px]">
+          Scheduled: {formatDate(audit.scheduled_start_date)}
+        </span>
+
+        <Link
+          to={`/internal-audits/${audit.id}`}
+          className="px-3 py-1.5 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors text-xs"
+        >
+          Audit Details →
+        </Link>
+      </div>
+    </div>
+  );
+};

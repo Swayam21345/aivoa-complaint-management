@@ -1,0 +1,52 @@
+# ─── OS / Editor ─────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ─── Secrets — NEVER commit these ────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ─── Frontend ─────────────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+
+# ─── Backend ──────────────────────────────────────────────────────────────────
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/**/*.pyo
+backend/.venv/
+backend/venv/
+backend/.ruff_cache/
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/htmlcov/
+backend/.coverage
+backend/dist/
+backend/build/
+backend/*.egg-info/
+backend/uploads/
+
+# ─── Test Databases ───────────────────────────────────────────────────────────
+backend/test.db
+backend/*.db
+backend/file:testdb_*
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+# Keep docker-compose.yml; ignore override files with local secrets
+docker-compose.override.yml
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+logs/
