@@ -58,3 +58,9 @@ async def seed_default_admin(db: AsyncSession) -> None:
             db.add(new_user)
 
     await db.commit()
+
+    try:
+        from scripts.seed_demo_complaints import seed as seed_complaints
+        await seed_complaints()
+    except Exception as e:
+        print(f"[AICCMS] Complaint seeding note: {e}")
