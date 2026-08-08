@@ -44,7 +44,7 @@ class Settings(BaseSettings):
         return v
 
     # ── CORS ───────────────────────────────────────────────────────────────
-    cors_origins: List[str] = ["http://localhost:5173", "http://localhost:3000", "http://localhost:80", "http://localhost"]
+    cors_origins: List[str] = ["*"]
 
     # ── File upload limits ─────────────────────────────────────────────────
     max_pdf_size_mb: int = 20
