@@ -33,10 +33,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     print(f"[AICCMS] Environment : {settings.environment}")
     print(f"[AICCMS] Debug mode  : {settings.debug}")
     try:
+        from app.db.session import engine
+        from app.models.base import Base
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        print("[AICCMS] Database tables verified/created successfully.")
         async with AsyncSessionLocal() as session:
             await seed_default_admin(session)
     except Exception as e:
-        print(f"[AICCMS] Startup database seeding note: {e}")
+        print(f"[AICCMS] Startup database initialization note: {e}")
     yield
     print("[AICCMS] Shutting down.")
 
